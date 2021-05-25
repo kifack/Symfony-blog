@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block title %}Article{% endblock %}
+    {% import 'extra/macro/btn.html.twig' as btn %}
+    {% import 'extra/macro/badge.html.twig' as badge %}
+{% block body %}
+<div class="container">
+    <h1>Article</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ article.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ article.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ article.description }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ article.price }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <td>State</td>
+                <td> {{ badge.article_state(article) }}</td>
+            </tr>
+        </tbody>
+    </table>
+   
+     {{  btn.simple(path('article_index'), 'light','Retour') }}
+     {{  btn.simple(path('article_edit',{'id': article.id}), 'success','Editer') }}
+</div>
+{% endblock %}

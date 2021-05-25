@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block title %}Hello DefaultController!{% endblock %}
+{% block body %}
+<div class="container">
+    <h1 class="text-center">Home Page</h1>
+    {% for category in categories %}
+        <div>
+            <h1 class="text-primary text-center"> Category: "{{ category.name }}"</h1>
+            <div class="row">
+                {% for article in category.articles | slice(0,3) %}
+                 <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">{{article.name | slice(0,8)}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title text-center">{{article.price }} € <small class="text-muted"> </small></h1>
+                        <p class="text-center">{{ article.description | slice(0,13) }}</p>
+                        <a href="{{ path('read',{'id':article.id})}}" class="btn btn-lg btn-block btn-outline-primary">Show article</a>
+                    </div>
+                </div>
+            </div>
+             {% else %}
+                <h2 class="col-md-12 text-center text-info">No article for this category</h2>
+            {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

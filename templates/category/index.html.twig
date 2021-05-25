@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% import 'extra/macro/btn.html.twig' as btn %}
+
+{% block title %}Category index{% endblock %}
+
+{% block body %}
+     
+     <div class="container">
+         <h1 class="text-center text-primary mb-3 ">Catories List</h1>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>
+                    <div class="btn-group">
+
+                        {{  btn.simple(path('category_edit', {'id': category.id}) , 'success','Edit','ROLE_UPDATE_CATEGORY',category) }}
+
+                        {{  btn.simple(path('category_delete', {'id': category.id}) , 'danger','Delete','ROLE_DELETE_CATEGORY',category)}}
+                    
+
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3" class="text-center">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+      {{  btn.simple(path('category_new') , 'primary','New category','ROLE_CREATE_CATEGORY') }}
+     </div>
+{% endblock %}

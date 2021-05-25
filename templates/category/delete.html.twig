@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block title %}Delete Category{% endblock %}
+{% import 'extra/macro/btn.html.twig' as btn %}
+
+{% block body %}
+<div class="container">
+    <h1 class="text-danger text-center">Delete Category "{{ category.name }}"</h1>
+    <h2>Are you sure you want to delete it ?</h2>
+    <form method="post" action="{{ path('category_delete', {'id': category.id}) }}">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+
+        <div class="btn-group">
+         	
+         {{  btn.simple(path('category_index') , 'light','Annuler') }}
+        <button class="btn btn-danger" type="submit">Delete</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

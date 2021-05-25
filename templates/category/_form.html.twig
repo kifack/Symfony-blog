@@ -1,0 +1,8 @@
+{% import 'extra/macro/btn.html.twig' as btn %}
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div>
+	    <button class="btn btn-{{- btnClass }}">{{ button_label|default('Ajouter') }}</button>
+	     {{  btn.simple(path('category_index') , 'light','Annuler') }}
+   </div>
+{{ form_end(form) }}

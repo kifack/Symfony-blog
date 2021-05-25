@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block title %}Edit Article{% endblock %}
+{% import 'extra/macro/btn.html.twig' as btn %}	
+{% import 'extra/macro/badge.html.twig' as badge %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 m-auto">
+            <h1>Edit Article  </h1>{{ badge.article_state(article) }}
+            {{ include('article/_form.html.twig', {'button_label': 'Update','btnClass':'success'}) }}
+
+           {% for place in workflow_transitions(article) %}
+
+           	   {# {% set color = place.name === '' %} #}
+           	   {% if place.name == 'publish' %}
+                    {{  btn.simple(path('article_state_change',{'id':article.id,'transition':place.name}) , 'info',place.name) }}
+           	   {% elseif place.name == 'unpublish' %}
+
+              {{  btn.simple(path('article_state_change',{'id':article.id,'transition':place.name}) , 'danger',place.name) }}
+
+           	   {% endif %}
+           {% endfor %}
+           
+        </div>
+    </div>
+</div>
+{% endblock %}

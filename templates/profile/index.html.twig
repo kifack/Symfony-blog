@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+   
+   <div class="container">
+   
+           {% for message in app.flashes('error') %}
+             <div class="alert alert-danger text-center">
+               {{ message }}
+              </div>
+          {% endfor %}
+         
+      <div class="row">
+        <div class="col-md-8 m-auto">
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <input type="submit" class="btn btn-success" value="Update">
+             </div>
+            {{ form_end(form) }}
+        </div>
+      </div>
+   </div>
+{% endblock %}

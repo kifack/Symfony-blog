@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% import 'extra/macro/btn.html.twig' as btn %}
+{% import 'extra/macro/badge.html.twig' as badge %}
+
+{% block title %}Article index{% endblock %}
+{% block body %}
+<div class="container">
+    <h1 class="text-primary text-center">Article List</h1>
+      
+          {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+               {{ message }}
+         </div>
+          {% endfor %}
+    
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>CreatedAt</th>
+                <th>State</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.name }}</td>
+                <td>{{ article.author.email }}</td>
+                <td>{{ article.description | slice(0,15)}}</td>
+                <td>{{ article.price }}</td>
+                <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <div class="btn-group">
+                        {{  btn.simple(path('article_show', {'id': article.id}) , 'light','Show','ROLE_READ_ARTICLE',article) }}
+
+                        {{  btn.simple(path('article_edit', {'id': article.id}) , 'success','Edit','ROLE_UPDATE_ARTICLE',article) }}
+
+                        {{  btn.simple(path('article_delete', {'id': article.id}) , 'danger','Delete','ROLE_DELETE_ARTICLE',article)}}
+                    
+
+                    </div>
+                </td>
+                <td>
+                    {{ badge.article_state(article) }}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+     {{  btn.simple(path('article_new') , 'primary','Create new','ROLE_CREATE_ARTICLE') }}
+</div>
+{% endblock %}
