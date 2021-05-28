@@ -6,6 +6,7 @@ use App\Entity\Article;
 use Symfony\Component\Security\Core\Security;
 
 
+
 class AddArticleController
 {
     private $security;
